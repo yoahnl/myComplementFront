@@ -26,3 +26,14 @@ mutation newUser($input: createUserInput) {
   }
 }
 `;
+
+export const GET_USER = gql `
+query user($input: ID!) {
+  user(id: $input)
+  {
+    username
+    email
+    boarded
+  }
+}
+`;

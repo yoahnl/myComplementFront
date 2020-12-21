@@ -36,3 +36,13 @@ export interface UserInfo {
     id:        string;
     jwt:       string;
 }
+
+export interface UserBoarded {
+    user: UserBoardedData
+}
+
+export interface UserBoardedData {
+    username    : string,
+    email       : string
+    boarded     : boolean,
+}

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import {LandingComponent} from './greating/landing/landing.component';
+import {OnBoardingComponent} from './greating/on-boarding/on-boarding.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
     path: 'landing',
     component: LandingComponent
   },
+  {
+    path: 'onBoarding',
+    component: OnBoardingComponent
+  }
 ];
 @NgModule({
   imports: [

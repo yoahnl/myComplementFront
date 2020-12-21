@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit
     let user = this.auth.userInfo();
     if (user.jwt != null)
     {
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl('').then();
     }
   }
 
@@ -46,8 +46,4 @@ export class LoginComponent implements OnInit
     });
   }
 
-    toRegister()
-    {
-        this.router.navigateByUrl('register').then();
-    }
 }

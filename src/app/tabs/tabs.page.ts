@@ -14,6 +14,7 @@ export class TabsPage implements OnInit{
   ngOnInit()
   {
     let user = this.auth.userInfo();
+    this.auth.getuserBoardedStatus();
     if (user.jwt == null)
     {
       this.router.navigateByUrl('landing').then();

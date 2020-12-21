@@ -1,9 +1,10 @@
 import { Injectable             } from '@angular/core';
 import { Apollo                 } from 'apollo-angular';
-import {Login, UserInfo, UserLogin} from '../models/userLogin';
-import {LOGIN_AUTH, REGISTRER_AUTH} from './graphQL/auth';
+import {Login, UserBoarded, UserInfo, UserLogin} from '../models/userLogin';
+import {GET_USER, LOGIN_AUTH, REGISTRER_AUTH} from './graphQL/auth';
 import { Subscription           } from 'rxjs';
 import {Router} from '@angular/router';
+import {ApolloQueryResult} from '@apollo/client';
 
 @Injectable()
 export class AuthService
@@ -58,7 +59,6 @@ export class AuthService
         return userInfo;
     }
 
-
     loginWithCredential(userInfo: UserLogin)
     {
         this.login(userInfo).subscribe(({data}) => {
@@ -75,5 +75,22 @@ export class AuthService
         }, (error) => {
             console.log('there was an error sending the query', error);
         });
+    }
+
+    getuserBoardedStatus()
+    {
+        this.apollo.query(
+            {
+                query: GET_USER,
+                fetchPolicy: 'network-only',
+                variables: {
+                    'input' : localStorage.getItem("id")
+                },
+            }).subscribe((data:ApolloQueryResult<UserBoarded>) => {
+                if (!data.data.user.boarded)
+                {
+                    this.router.navigateByUrl('onBoarding').then();
+                }
+        })
     }
 }
