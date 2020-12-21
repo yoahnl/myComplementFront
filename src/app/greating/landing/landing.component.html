@@ -1,0 +1,20 @@
+<ion-content class="loginBG" [forceOverscroll]="false">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col class="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
+        <div class="ion-text-center">
+          <h1 class="title">{{projectTitle}}</h1>
+        </div>
+      </ion-col>
+    </ion-row>
+      <app-login *ngIf="isLogin"></app-login>
+      <app-register *ngIf="!isLogin"></app-register>
+    <ion-col>
+      <div class="ion-padding ion-text-center">
+        <a (click)="changeIsLogin()">
+          {{promptLabelButtonTitle}}
+        </a>
+      </div>
+    </ion-col>
+  </ion-grid>
+</ion-content>
