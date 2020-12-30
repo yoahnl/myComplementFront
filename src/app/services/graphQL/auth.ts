@@ -37,3 +37,37 @@ query user($input: ID!) {
   }
 }
 `;
+
+export const GET_USERINFO = gql `
+query user($input: ID!) {
+  user(id: $input)
+  {
+      id
+      username
+      email
+      boarded
+      age
+      weight
+      gender
+      workout
+      Height
+      type
+  }
+}
+`;
+
+export const UPDATE_USERINFO = gql `
+mutation updateUser($input: updateUserInput)
+{
+  updateUser(input: $input)
+  {
+    user {
+      id
+      age
+      weight
+      gender
+      workout
+    }
+  }
+}
+`;

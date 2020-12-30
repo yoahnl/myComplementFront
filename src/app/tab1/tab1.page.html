@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Home
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,7 +12,19 @@
       <ion-title size="large">Tab 1</ion-title>
     </ion-toolbar>
   </ion-header>
-<p>
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, laborum vitae error, repudiandae facere veritatis quis maiores ullam blanditiis laboriosam consectetur nemo, pariatur doloribus dolore distinctio repellendus. Alias, molestiae reiciendis.
-</p>
+  <div *ngIf="showComplement">
+    <div *ngFor="let complementElem of complementElems">
+      <ion-card>
+        <img src="{{complementElem.image}}" />
+        <ion-card-header>
+          <ion-card-title>
+            {{complementElem.name}}
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          {{complementElem.description}}
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
 </ion-content>

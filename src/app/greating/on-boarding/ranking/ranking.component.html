@@ -1,0 +1,18 @@
+<ion-row >
+  <ion-card style="width: 100%">
+    <ion-card-header>
+      <ion-card-title>{{questions.title}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-range (ionChange)="getSelectedData()" color="danger" pin="true" [(ngModel)]="response" min="{{questions.question[1]}}" max="{{questions.question[2]}}"></ion-range>
+      </ion-item>
+      <ion-item>
+        <ion-card-title *ngIf="response != null">
+          {{response}} {{questions.question[0]}}
+        </ion-card-title>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-row>

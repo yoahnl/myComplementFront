@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Dosage
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,7 +9,36 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
+      <ion-title size="large">Tab 1</ion-title>
     </ion-toolbar>
   </ion-header>
+  <div *ngIf="showComplement">
+    <div *ngFor="let complementElem of complementElems">
+      <ion-card>
+        <ion-card-content>
+          <ion-list>
+            <ion-item>
+              <ion-avatar slot="start" style="width: 70px; height: 70px;" (click)="presentPopOver(complementElem.description, complementElem.name)">
+                <img src="{{complementElem.image}}">
+              </ion-avatar>
+              <ion-card-title>{{complementElem.name}}</ion-card-title>
+            </ion-item>
+            <ion-item>
+              <ion-label>Dosage: {{complementElem.dosage}}</ion-label>
+            </ion-item>
+            <ion-item>
+              <p>{{complementElem.dosage_description}}</p>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                Took it today!
+              </ion-label>
+              <ion-toggle (ionChange)="toogleTook($event)"></ion-toggle>
+            </ion-item>
+          </ion-list>
+
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
 </ion-content>

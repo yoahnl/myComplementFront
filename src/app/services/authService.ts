@@ -1,10 +1,12 @@
-import { Injectable             } from '@angular/core';
-import { Apollo                 } from 'apollo-angular';
-import {Login, UserBoarded, UserInfo, UserLogin} from '../models/userLogin';
-import {GET_USER, LOGIN_AUTH, REGISTRER_AUTH} from './graphQL/auth';
-import { Subscription           } from 'rxjs';
-import {Router} from '@angular/router';
-import {ApolloQueryResult} from '@apollo/client';
+import { Injectable                                 } from '@angular/core';
+import { Apollo                                     } from 'apollo-angular';
+import {Login, Type, UserBoarded, UserInfo, UserLogin} from '../models/userLogin';
+import {GET_USER, GET_USERINFO, LOGIN_AUTH, REGISTRER_AUTH, UPDATE_USERINFO} from './graphQL/auth';
+import { Subscription                               } from 'rxjs';
+import { Router                                     } from '@angular/router';
+import { ApolloQueryResult                          } from '@apollo/client/core';
+
+
 
 @Injectable()
 export class AuthService
@@ -46,10 +48,17 @@ export class AuthService
     userInfo(): UserInfo
     {
         let userInfo: UserInfo = new class implements UserInfo {
-            email: string;
-            id: string;
-            jwt: string;
-            username: string;
+
+            username:   string;
+            email:      string;
+            id:         string;
+            jwt:        string;
+            age:        number;
+            weight:     number;
+            Height:     number;
+            gender:     string;
+            workOut:    string;
+            type:       Type;
         };
         userInfo.jwt = localStorage.getItem("jwt");
         userInfo.username = localStorage.getItem("username");
@@ -64,8 +73,6 @@ export class AuthService
         this.login(userInfo).subscribe(({data}) => {
             // @ts-ignore
             let test = data.login as Login;
-            console.log('got data', data);
-            console.log(test.jwt);
             localStorage.setItem("jwt", test.jwt);
             localStorage.setItem("username", test.user.username);
             localStorage.setItem("email", test.user.email);
@@ -92,5 +99,46 @@ export class AuthService
                     this.router.navigateByUrl('onBoarding').then();
                 }
         })
+    }
+
+    updateUserInfo(response: string[])
+    {
+        console.table(response);
+        let gender  : string = response[0];
+        let weight  : number = Number(response[1]);
+        let workout : string = response[2];
+        let height  : number = Number(response[3]);
+        let age     : number = Number(response[4]);
+        let type    : string = response[6];
+
+        return this.apollo.mutate({
+            mutation: UPDATE_USERINFO,
+            variables: {
+                "input": {
+                    "where": {"id": localStorage.getItem("id")},
+                    "data": {
+                        "age"       : age,
+                        "Height"    : height,
+                        "weight"    : weight,
+                        "gender"    : gender,
+                        "workout"   : workout,
+                        "boarded"   : true,
+                        "type"      : type
+                    }
+                }
+            }
+        });
+    }
+
+    getAllUserInfo()
+    {
+        return this.apollo.query(
+            {
+                query: GET_USERINFO,
+                fetchPolicy: 'network-only',
+                variables: {
+                    'input' : localStorage.getItem("id")
+                },
+            });
     }
 }

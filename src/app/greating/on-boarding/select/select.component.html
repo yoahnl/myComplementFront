@@ -1,0 +1,16 @@
+<ion-radio-group  (ionChange)="getSelectedData()" [(ngModel)]="response">
+  <ion-row *ngFor="let question of questions.question; let index = index;">
+    <ion-card style="width: 100%">
+      <ion-card-header>
+        <ion-card-title *ngIf="!isWorkOut">{{question}}</ion-card-title>
+        <ion-card-title *ngIf="isWorkOut">{{questionWorkOutTmp.question[index]}}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item>
+          <ion-radio slot="start" value="{{question}}"></ion-radio>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </ion-row>
+</ion-radio-group>

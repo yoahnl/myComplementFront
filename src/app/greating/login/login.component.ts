@@ -33,8 +33,6 @@ export class LoginComponent implements OnInit
    this.auth.login(userInfo).subscribe(({data}) => {
      // @ts-ignore
      let test = data.login as Login;
-      console.log('got data', data);
-      console.log(test.jwt);
       localStorage.setItem("jwt", test.jwt);
       localStorage.setItem("username", test.user.username);
       localStorage.setItem("email", test.user.email);

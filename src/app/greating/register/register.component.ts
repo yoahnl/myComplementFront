@@ -26,11 +26,9 @@ export class RegisterComponent implements OnInit
 
   register(userInfo: UserLogin)
   {
-    console.log(userInfo);
     this.auth.register(userInfo).subscribe(({data}) => {
       // @ts-ignore
       let test = data.login as Login;
-      console.log('got data', data);
       this.auth.loginWithCredential(userInfo);
 
     }, (error) => {

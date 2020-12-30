@@ -1,3 +1,26 @@
-<p>
-  on-boarding works!
-</p>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <div class="ion-text-center">
+        <h1>
+          {{questionElements.title}}
+        </h1>
+      </div>
+    </ion-row>
+    <div [ngSwitch]="questionElements.type">
+      <app-select  *ngSwitchCase="0" [questions]="questionElements" (updateObjDataEvent)="updateObj($event)"></app-select>
+      <app-ranking *ngSwitchCase="1" [questions]="questionElements" (updateObjDataEvent)="updateObj($event)"></app-ranking>
+    </div>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="full" size="large" [disabled]="isNextAvaible" (click)="goToNextQuestion()">
+          {{next}}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<!--
+
+-->

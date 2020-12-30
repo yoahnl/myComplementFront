@@ -14,10 +14,6 @@ export enum PromptActionButtonTitle {
     register = 'Back to login'
 }
 
-export interface Data {
-    login: Login;
-}
-
 export interface Login {
     jwt:  string;
     user: User;
@@ -31,10 +27,16 @@ export interface User {
 }
 
 export interface UserInfo {
-    username:  string;
-    email:     string;
-    id:        string;
-    jwt:       string;
+    username:   string;
+    email:      string;
+    id:         string;
+    jwt:        string;
+    age:        number;
+    weight:     number;
+    gender:     string;
+    Height:     number;
+    workOut:    string;
+    type:       Type;
 }
 
 export interface UserBoarded {
@@ -42,7 +44,20 @@ export interface UserBoarded {
 }
 
 export interface UserBoardedData {
-    username    : string,
-    email       : string
-    boarded     : boolean,
+    username:   string;
+    boarded:   boolean;
+    email:      string;
+    id:         string;
+    jwt:        string;
+    age:        number;
+    weight:     number;
+    gender:     string;
+    Height:     number;
+    workOut:    string;
+}
+
+export enum Type {
+    low     = "low",
+    medium  = "medium",
+    hight   = "hight"
 }
